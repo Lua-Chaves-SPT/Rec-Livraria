@@ -115,6 +115,13 @@
                                 <input name="precoVenda" id="precoVenda" maxlength="20" type="Text"></input>
                             </label>
 
+                            <label>
+                                Quantidade em Estoque:
+                                <br>
+                                <input name="estoque" id="estoque" maxlength="20" type="Text"></input>
+                            </label>
+
+
 
                             <button>Cadastrar</button>
                         </form>
@@ -165,6 +172,9 @@
             var precoValidar = precoCompraValidar + taxaVenda;
             
             alert(`O preço de venda deve ser pelo menos R$${precoValidar}`)
+        } else {
+
+            precoValidar = precoVendaValidar;
         }
             
             var corpo = {
@@ -172,7 +182,8 @@
                 fkGenero: form_postagem.fkGenero_lista.value,
                 fkAutor: form_postagem.fkAutor_lista.value,
                 precoCompra: form_postagem.precoCompra.value,
-                precoVenda: precoValidar
+                precoVenda: precoValidar,
+                estoque: form_postagem.estoque.value
             }
 
             fetch(`/livros/cadastrar`, {

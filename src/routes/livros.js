@@ -15,4 +15,16 @@ router.put("/editar/:id", function (req, res) {
     livrosController.editar(req, res);
 });
 
+router.get("/autoresCaros", function (req, res) {
+    livrosController.autoresCaros(req, res);
+});
+
+router.get("/maiorGenero", function (req, res) {
+    livrosController.maiorGenero(req, res);
+});
+
+router.get("/listarGeneros", function (req, res) {
+    livrosController.listarGeneros(req, res);
+});
+
 module.exports = router;

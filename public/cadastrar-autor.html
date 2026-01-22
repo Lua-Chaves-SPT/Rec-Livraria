@@ -119,20 +119,22 @@
 
         var nomeValidar = input_nome.value;
 
-        var numeros = Number('1', '2', '3', '4', '5', '6', '7', '8', '9', '0');
+        var proibidos = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0','!','@','#','$','%','&','*','(',')'];
+        
+        var corpo = {
+            nome: form_postagem.nome.value
+        }
+        
+        for (var i = 0; i < proibidos.length; i++){
 
-        if (nomeValidar.includes(numeros)) {
-
-            alert('Não pode ter números ou caracteres especiais no nome');
-
-        } else {
-
-
-            var corpo = {
-                nome: form_postagem.nome.value
+            proibidosAtual = proibidos[i];
+            if (nomeValidar.includes(proibidosAtual)) {
+    
+                alert('Não pode ter números ou caracteres especiais no nome');
+                return false;
+            
             }
-
-
+        }
             fetch(`/autores/cadastrar`, {
                 method: "post",
                 headers: {
@@ -140,14 +142,14 @@
                 },
                 body: JSON.stringify(corpo)
             }).then(function (resposta) {
-
+                
                 console.log("resposta: ", resposta);
-
+                
                 if (resposta.ok) {
                     window.alert("Post realizado com sucesso. Você será redirecionado ao Acervo.");
                     window.location = "/";
                     limparFormulario();
-
+                    
                 } else if (resposta.status == 404) {
                     window.alert("Deu 404!");
                 } else {
@@ -155,13 +157,10 @@
                 }
             }).catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-
+                
             });
-        }
-
-
-
-        return false;
+        
+            return false;
 
     }
 
